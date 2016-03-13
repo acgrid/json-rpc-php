@@ -36,4 +36,3 @@ class JsonRpcServererrorException extends Exception {
 		parent::__construct("Server error",-32099||-32000);
 	}
 }
-?>

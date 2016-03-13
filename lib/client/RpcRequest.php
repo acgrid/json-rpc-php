@@ -56,4 +56,3 @@ class RpcRequest {
 		return RpcRequest::$_id++;
 	}
 }
-?>

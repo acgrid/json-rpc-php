@@ -15,4 +15,3 @@ class AuthenticatedJsonRpcClient extends JsonRpcClient {
 		return $responseObject;
 	}
 }
-?>

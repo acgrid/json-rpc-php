@@ -85,4 +85,3 @@ class JsonRpcService {
         session_destroy();
 	}
 }
-?>

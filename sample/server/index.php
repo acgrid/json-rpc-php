@@ -16,4 +16,3 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $server->addService(new PersonServiceImpl());
 	$server->processingRequests();
 }
-?>

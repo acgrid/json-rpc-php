@@ -30,5 +30,3 @@ var_dump($client->addPerson('asd'));
 var_dump($client->call(new RpcRequest("invalidateSession",null)));
 var_dump($client->something());
 echo '</pre>';
-
-?>

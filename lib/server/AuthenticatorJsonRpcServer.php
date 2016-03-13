@@ -18,4 +18,3 @@ class AuthenticatorJsonRpcServer extends JsonRpcServer {
 		}
 	}
 }
-?>

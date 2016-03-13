@@ -20,4 +20,3 @@ class MathServiceImpl extends JsonRpcService {
 		return $name;
 	}
 }
-?>

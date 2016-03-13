@@ -38,4 +38,3 @@ class RpcResponse {
 			$this->_id = $id;
 	}
 }
-?>
