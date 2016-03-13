@@ -1,11 +1,11 @@
-[﻿JSON-RPC 2.0](http://www.jsonrpc.org/spec.html) Client/Server library for PHP
+[JSON-RPC 2.0](http://www.jsonrpc.org/spec.html) Client/Server library for PHP with Composer PSR-4 enabled
 ###Requirements
-PHP 5.2.6+
+PHP 5.5.0+
 
 ###Used predefined classes and interfaces
- - [ReflectionClass](http://www.php.net/manual/en/class.reflectionclass.php) @ `lib/server/Service`
- - [ReflectionMethod](http://www.php.net/manual/en/class.reflectionmethod.php) @ `lib/server/Service`
- - [Exception](http://www.php.net/manual/en/class.exception.php) @ `lib/server/JsonRpcExceptions`
+ - [ReflectionClass](http://www.php.net/manual/en/class.reflectionclass.php)
+ - [ReflectionMethod](http://www.php.net/manual/en/class.reflectionmethod.php)
+ - [SPL Exceptions](http://php.net/manual/en/spl.exceptions.php)
 
 #How do I use the client?
 After you instantiate the `JsonRpcClient` with the server URL, there have two option to send a request. Both method using the `RpcRequest` class @ `lib/client/` which help us to sending a well formatted request. Step by step tuturial soon.

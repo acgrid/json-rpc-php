@@ -1,5 +1,9 @@
 <?php
 
+namespace pozo\jsonrpc\Server;
+use \ReflectionClass;
+use \ReflectionMethod;
+
 class JsonRpcService {
 	const ANNOTATION = '@JsonRpcMethod';
 	const REQUEST_LOGIN = 'request_login';
@@ -27,8 +31,9 @@ class JsonRpcService {
 				return $method->getParameters();
 			}
 		}
+		return null;
 	}
-	protected function isJsonRpcMethod($method) {
+	protected function isJsonRpcMethod(ReflectionMethod $method) {
 		if(strstr($method->getDocComment(),JsonRpcService::ANNOTATION)) {
 			return true;
 		}

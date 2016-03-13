@@ -1,7 +1,7 @@
 <?php
-function __autoload($className) {
-	include_once($className.".php");
-}
+
+namespace pozo\jsonrpc\Client;
+
 class JsonRpcClient {
 	private $_rpcUrl;
 	private $_curlCookie;
@@ -13,10 +13,8 @@ class JsonRpcClient {
 	public function __call($name, $arguments) {
 		return $this->call(new RpcRequest($name,$arguments));
 	}
-	public function call($rpcRequest) {
-		if($rpcRequest instanceof RpcRequest) {
-			return $this->httpRequest($rpcRequest->getRpcRequestObject());
-		}
+	public function call(RpcRequest $rpcRequest) {
+        return $this->httpRequest($rpcRequest->getRpcRequestObject());
 	}
 	public function callBatch($rpcRequestList) {
         $rpcBatchArray = array();
@@ -46,7 +44,7 @@ class JsonRpcClient {
 
         $response = curl_exec($curlHandler);
         if(!$response) {
-          throw new Exception('Curl error: ' . curl_error($curlHandler), curl_errno($curlHandler));
+            throw new \RuntimeException('Curl error: ' . curl_error($curlHandler), curl_errno($curlHandler));
         }
         curl_close($curlHandler);
         $json_response = json_decode($response);
@@ -74,7 +72,7 @@ class JsonRpcClient {
             $message .= "\nMethod: " . $rpcBatchArray->method.
                         "\nParams: " . var_export($rpcBatchArray->params, TRUE).
                         "\nResponse: " . $response;
-            throw new Exception($message, json_last_error());
+            throw new \RuntimeException($message, json_last_error());
         }
         return $json_response;
 	}

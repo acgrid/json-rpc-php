@@ -1,5 +1,8 @@
 <?php
 
+namespace pozo\jsonrpc\Server;
+use \stdClass;
+
 class RpcError {
 	private $_code;
 	private $_message;
