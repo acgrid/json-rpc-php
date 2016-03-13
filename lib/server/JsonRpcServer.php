@@ -184,7 +184,7 @@ class JsonRpcServer {
 	}
 	private function call($methodOwnerService, $requestObject) {
 		$callbackFunction = array($methodOwnerService,$requestObject->method);
-		return call_user_func_array($callbackFunction, $requestObject->params);
+		return call_user_func_array($callbackFunction, is_string($requestObject->params) ? [$requestObject->params] : $requestObject->params);
 	}
 	protected function doResponse($responseObject) {
 		if(!empty($responseObject)) {
