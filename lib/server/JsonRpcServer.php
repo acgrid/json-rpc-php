@@ -7,7 +7,7 @@ use \Exception;
 class JsonRpcServer {
 	private $_requestText;
 	private $_listOfCallableServices;
-	private $_requestObject;
+	protected $_requestObject;
 	private $_responseBatchArray = array();
 
 	function __construct($postRequest) {
@@ -27,14 +27,14 @@ class JsonRpcServer {
 			$this->doResponse($responseObject->getRpcResponseObject());
 		}
 	}
-	private function parseRequestJson() {
+	protected function parseRequestJson() {
 		if(!is_null($requestObjects = json_decode($this->_requestText))) {
 			$this->_requestObject = $requestObjects;
 		} else {
 			throw new JsonRpcParseErrorException();
 		}
 	}
-	private function performCalls() {
+	protected function performCalls() {
 		if($this->isBatchRequestAndNotEmpty()) {
 			$this->performBatchCall();
 		} else {
@@ -186,7 +186,7 @@ class JsonRpcServer {
 		$callbackFunction = array($methodOwnerService,$requestObject->method);
 		return call_user_func_array($callbackFunction, $requestObject->params);
 	}
-	private function doResponse($responseObject) {
+	protected function doResponse($responseObject) {
 		if(!empty($responseObject)) {
 			header('Content-Type: application/json');
 			echo json_encode($responseObject);
