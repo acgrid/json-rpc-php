@@ -1,11 +1,20 @@
 [JSON-RPC 2.0](http://www.jsonrpc.org/spec.html) Client/Server library for PHP with Composer PSR-4 enabled
+### LICENSE
+The original author `pozo` did not state any license used. Please inform me if you do not allow forking and porting.
+
 ###Requirements
-PHP 5.5.0+
+PHP 5.5.0+, with composer PSR-4 support.
+
+Install with `composer require acgrid/json-rpc-php` or add `"acgrid/json-rpc-php": "@dev"` to your `composer.json`.
 
 ###Used predefined classes and interfaces
  - [ReflectionClass](http://www.php.net/manual/en/class.reflectionclass.php)
  - [ReflectionMethod](http://www.php.net/manual/en/class.reflectionmethod.php)
  - [SPL Exceptions](http://php.net/manual/en/spl.exceptions.php)
+ 
+# NOTE
+
+The following README is written by original author. Please keep in mind that namespace is introduced already. 
 
 #How do I use the client?
 After you instantiate the `JsonRpcClient` with the server URL, there have two option to send a request. Both method using the `RpcRequest` class @ `lib/client/` which help us to sending a well formatted request. Step by step tuturial soon.
