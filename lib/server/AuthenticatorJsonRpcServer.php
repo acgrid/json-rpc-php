@@ -1,5 +1,8 @@
 <?php
 
+namespace pozo\jsonrpc\Server;
+use \Exception;
+
 class AuthenticatorJsonRpcServer extends JsonRpcServer {
 	private function isAuthenticatedRequest() {
 		return isset($_SESSION['RPC']['authenticated']);

@@ -1,4 +1,6 @@
 <?php
+
+namespace pozo\jsonrpc\Client;
  
 class AuthenticatedJsonRpcClient extends JsonRpcClient {
 	private $_username;

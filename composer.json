@@ -1,0 +1,25 @@
+{
+    "name": "acgrid/json-rpc-php",
+    "license": "GPL-3.0",
+    "type": "library",
+    "description": "Port of Pozo/json-rpc-php library into PHP 5/7",
+    "keywords": ["jsonrpc", "Web Service"],
+    "homepage": "https://github.com/acgrid/json-rpc-php",
+    "authors": [
+        {
+            "name": "Pozo",
+            "homepage": "https://github.com/Pozo/json-rpc-php",
+            "role": "Creator of the original library"
+        },
+        {
+            "name": "acgrid",
+            "homepage": "https://github.com/acgrid"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "pozo\\jsonrpc\\": "lib/" }
+    },
+    "require": {
+        "php": ">=5.5"
+    }
+}

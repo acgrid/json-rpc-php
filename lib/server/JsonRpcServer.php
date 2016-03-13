@@ -1,11 +1,8 @@
 <?php
-function __autoload($className) {
-    if(strstr($className,'Exception')) {
-        include_once("JsonRpcExceptions.php");
-    } else {
-        include_once($className.".php");
-    }
-}
+
+namespace pozo\jsonrpc\Server;
+use \stdClass;
+use \Exception;
 
 class JsonRpcServer {
 	private $_requestText;
@@ -17,7 +14,7 @@ class JsonRpcServer {
 		$this->_requestText = $postRequest;
 		$this->_listOfCallableServices = array();
 	}
-	public function addService($classInstance) {
+	public function addService(JsonRpcService $classInstance) {
         array_push($this->_listOfCallableServices, $classInstance);
 	}
 	public function processingRequests() {
@@ -71,9 +68,7 @@ class JsonRpcServer {
 		}
 	}
 	private function isNotification($requestObject) {
-		if(is_object($requestObject) && is_null($requestObject->id)) {
-			return true;
-		}
+		return is_object($requestObject) && is_null($requestObject->id);
 	}
 	private function getResponseObject($requestObject) {
 		try {
@@ -112,16 +107,23 @@ class JsonRpcServer {
 			   && is_string($requestMethod)
 			   && strncmp($reserved = "rpc.",$requestMethod,strlen($reserved)));
 	}
+
+	/**
+	 * @param $requestObject
+	 * @throws JsonRpcMethodNotFoundException
+	 * @return JsonRpcService
+	 */
 	protected function isMethodAvailable($requestObject) {
         $length = count($this->_listOfCallableServices);
         for($i=0;$i<$length;$i++) {
-			if(array_key_exists($requestObject->method, $this->_listOfCallableServices[$i]->getCallableMethodNames())) {
-    			return $this->_listOfCallableServices[$i];
+			$service =  $this->_listOfCallableServices[$i];
+			if($service instanceof JsonRpcService && array_key_exists($requestObject->method, $service->getCallableMethodNames())) {
+    			return $service;
 			}
         }
 		throw new JsonRpcMethodNotFoundException();
 	}
-	private function validateAndSortParameters($methodOwnerService, $requestObject) {
+	private function validateAndSortParameters(JsonRpcService $methodOwnerService, $requestObject) {
 		$validParameters = $methodOwnerService->getCallableMethodParameters($requestObject->method);
 
 		if($this->isValidParamsNumber($validParameters, $requestObject)
@@ -142,7 +144,7 @@ class JsonRpcServer {
 		}
 	}
 	private function buildResponseObject($requestOrExceptionObject, $service = null) {
-		if(is_null($service)) {
+		if(is_null($service) && $requestOrExceptionObject instanceof Exception) {
 			$responseBody = new RpcError($requestOrExceptionObject->getMessage(),$requestOrExceptionObject->getCode());
 			$responseObject = new RpcResponse($responseBody);
 		} else {

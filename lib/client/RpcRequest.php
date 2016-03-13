@@ -1,5 +1,8 @@
 <?php
 
+namespace pozo\jsonrpc\Client;
+use \stdClass;
+
 class RpcRequest {
 	const VERSION = "2.0";
 	private $_methodName;

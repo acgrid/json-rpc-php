@@ -1,5 +1,8 @@
 <?php
 
+namespace pozo\jsonrpc\Server;
+use \stdClass;
+
 class RpcResponse {
 	const VERSION = "2.0";
 	private $_resultBody;
