@@ -76,11 +76,9 @@ class JsonRpcServer {
 			$methodOwnerService = $this->isMethodAvailable($requestObject);
 			$this->validateAndSortParameters($methodOwnerService, $requestObject);
 			$responseObject = $this->buildResponseObject($requestObject, $methodOwnerService);
-		} catch(JsonRpcMethodNotFoundException $exception) {
-			$responseObject = $this->buildResponseObject($exception);
-			$responseObject->setResponseObjectId($requestObject->id);
 		} catch(Exception $exception) {
 			$responseObject = $this->buildResponseObject($exception);
+      $responseObject->setResponseObjectId($requestObject->id);
 		}
 		return $responseObject;
 	}
@@ -98,9 +96,9 @@ class JsonRpcServer {
 	}
 	private function isValidRequestObjectId($requestId) {
 		return (is_null($requestId)
-		        || is_string($requestId)
-				// 2 and "2" is valid but 2.1 and "2.1" is not
-		        || (ctype_digit($requestId) xor is_int($requestId)));
+        		// 2 and "2" is valid but 2.1 and "2.1" is not
+		        || (is_string($requestId) && ctype_digit($requestId))
+		        || is_int($requestId));
 	}
 	private function isValidRequestObjectMethod($requestMethod) {
 		return (!is_null($requestMethod)
