@@ -78,7 +78,7 @@ class JsonRpcServer {
 			$responseObject = $this->buildResponseObject($requestObject, $methodOwnerService);
 		} catch(Exception $exception) {
 			$responseObject = $this->buildResponseObject($exception);
-      $responseObject->setResponseObjectId($requestObject->id);
+			$responseObject->setResponseObjectId($requestObject->id);
 		}
 		return $responseObject;
 	}
